@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\News;
+use App\Models\Category;
+
 
 class AdminNewsController extends Controller
 {
+    public function __construct() 
+    {
+      $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,7 @@ class AdminNewsController extends Controller
      */
     public function index()
     {
-        $news = News::orderby('id', 'desc')->get();
+        $news = News::orderby('id', 'desc')->paginate(8);
         return view('adminpanel.news.index', compact('news'));
     }
 
@@ -25,7 +31,8 @@ class AdminNewsController extends Controller
      */
     public function create()
     {
-        return view('adminpanel.news.create');
+        $cats = Category::orderBy('name' , 'ASC')->get();
+        return view('adminpanel.news.create' , compact('cats'));
     }
 
     /**
@@ -40,6 +47,7 @@ class AdminNewsController extends Controller
         $new->title = $request->title;
         $new->desc_ka = $request->desc;
         $new->upload_date = date('Y-m-d');
+        $new->cat_id = $request->category;
         $new->save();
         $this->storeImage($new);
         return redirect()->back();
@@ -64,7 +72,9 @@ class AdminNewsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $news_info = News::where('id' , $id)->first();
+        $cats = Category::orderBy('name' , 'ASC')->get();
+        return view('adminpanel.news.edit' , compact('news_info', 'cats'));
     }
 
     /**
@@ -76,7 +86,13 @@ class AdminNewsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $news_update = News::findOrfail($id);
+        $news_update->title = $request->title;
+        $news_update->desc_ka = $request->desc;
+        $news_update->cat_id = $request->category;
+        $news_update->save();
+        $this->storeImage($news_update);
+        return redirect()->back();    
     }
 
     /**
@@ -85,9 +101,10 @@ class AdminNewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(News $News)
     {
-        //
+        $News->delete();
+        return redirect()->back();
     }
     public function storeImage($createdObject)
     {
@@ -96,8 +113,6 @@ class AdminNewsController extends Controller
             $createdObject->update([
                 'image' => request()->image->store('news', 'public'),  //ეს user_image არის ის სვეტი რომელიც ბაზაშიმაქ
             ]);
-
-
         }
 
         //composer require intervention/image

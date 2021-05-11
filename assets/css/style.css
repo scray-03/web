@@ -20059,7 +20059,8 @@ Blog large overlay layout with sidebar
     color: #fff;
 }
 .box.blog_grid_post_style .image-post-thumb > a > img {
-    width: 100%;
+    width: 360px;
+    height: 360px;
     float: left;
 }
 .box .image-post-thumb a > img,
@@ -22338,8 +22339,8 @@ Hover image
 
 .featured-thumbnail .background_over_image {
     position: absolute;
-    height: 100%;
-    width: 100%;
+    height: 250px;
+    width: 250px;
     top: 0;
     left: 0;
     opacity: 0;
@@ -24795,7 +24796,8 @@ Page builder block
     float: left;
 }
 .homepage_builder_3grid_post .blog_grid_post_style img {
-    width: 100%;
+    width: 400px;
+    height: 300px;
 }
 .homepage_builder_3grid_post .meta-category-small {
     margin-top: 10px;

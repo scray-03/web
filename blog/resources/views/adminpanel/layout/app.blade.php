@@ -59,6 +59,9 @@
 		<link href="{{ asset('assets/adminassets/switcher/css/switcher.css') }}" rel="stylesheet">
 		<link href="{{ asset('assets/adminassets/switcher/demo.css') }}" rel="stylesheet">
 
+		<script src="https://cdn.ckeditor.com/4.16.0/full-all/ckeditor.js"></script>
+
+
     </head>
 
     <body  class="main-body light-theme app sidebar-mini active leftmenu-color">
@@ -74,7 +77,7 @@
 		<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 		<aside class="app-sidebar">
 			<div class="main-sidebar-header active">
-				<a class="desktop-logo logo-light active" href="index.html">
+				<a class="desktop-logo logo-light active" href="{{ route('admin.index') }}">
 					<img src="{{ asset('assets/adminassets/img/brand/logo.png') }}" class="main-logo logo-color1" alt="logo">
 					<img src="{{ asset('assets/adminassets/img/brand/logo2.png') }}" class="main-logo logo-color2" alt="logo">
 					<img src="{{ asset('assets/adminassets/img/brand/logo3.png') }}" class="main-logo logo-color3" alt="logo">
@@ -82,7 +85,7 @@
 					<img src="{{ asset('assets/adminassets/img/brand/logo5.png') }}" class="main-logo logo-color5" alt="logo">
 					<img src="{{ asset('assets/adminassets/img/brand/logo6.png') }}" class="main-logo logo-color6" alt="logo">
 				</a>
-				<a class="desktop-logo logo-dark active" href="index.html"><img src="{{ asset('') }}assets/adminassets/img/brand/logo-white.png" class="main-logo dark-theme" alt="logo"></a>
+				<a class="desktop-logo logo-dark active" href="{{ route('admin.index') }}"><img src="{{ asset('') }}assets/adminassets/img/brand/logo-white.png" class="main-logo dark-theme" alt="logo"></a>
 				<div class="app-sidebar__toggle" data-toggle="sidebar">
 					<a class="open-toggle" href="#"><i class="header-icon fe fe-chevron-left"></i></a>
 					<a class="close-toggle" href="#"><i class="header-icon fe fe-chevron-right"></i></a>
@@ -91,7 +94,7 @@
 			<div class="main-sidemenu sidebar-scroll">
 				<ul class="side-menu">
 					<li class="slide">
-						<a class="side-menu__item" href="index.html"><div class="side-angle1"></div><div class="side-angle2"></div><div class="side-arrow"></div>
+						<a class="side-menu__item" href="{{ route('admin.index') }}"><div class="side-angle1"></div><div class="side-angle2"></div><div class="side-arrow"></div>
 						<svg class="side-menu__icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm5 15h-2v-6H9v6H7v-7.81l5-4.5 5 4.5V18z"/><path d="M7 10.19V18h2v-6h6v6h2v-7.81l-5-4.5z" opacity=".3"/></svg>
 						<span class="side-menu__label">მთავარი</span></a>
 					</li>
@@ -114,16 +117,16 @@
 						<span class="side-menu__label">კატეგორიები</span><i class="angle fe fe-chevron-right"></i></a>
 						<ul class="slide-menu">
 							<li class="sub-slide">
-								<a class="sub-side-menu__item" data-toggle="sub-slide" href="#"><span class="sub-side-menu__label">კატეგორიების სია</span><i class="sub-angle fe fe-chevron"></i></a>
+								<a class="sub-side-menu__item" data-toggle="sub-slide" href="{{ route('admin.cat.index') }}"><span class="sub-side-menu__label">კატეგორიების სია</span><i class="sub-angle fe fe-chevron"></i></a>
 							</li>
 							<li class="sub-slide">
-								<a class="sub-side-menu__item" data-toggle="sub-slide" href="#"><span class="sub-side-menu__label">კატეგორიის დამატება</span><i class="sub-angle fe fe-chevron"></i></a>
+								<a class="sub-side-menu__item" data-toggle="sub-slide" href="{{ route('admin.cat.create') }}"><span class="sub-side-menu__label">კატეგორიის დამატება</span><i class="sub-angle fe fe-chevron"></i></a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<div class="app-sidefooter">
-					<a class="side-menu__item" href="#"><svg class="side-menu__icon" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><g><rect fill="none" height="24" width="24"/></g><g><path d="M11,7L9.6,8.4l2.6,2.6H2v2h10.2l-2.6,2.6L11,17l5-5L11,7z M20,19h-8v2h8c1.1,0,2-0.9,2-2V5c0-1.1-0.9-2-2-2h-8v2h8V19z"/></g></svg> <span class="side-menu__label">Logout</span></a>
+					<a class="side-menu__item" href="{{ route('admin.logout') }}"><svg class="side-menu__icon" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><g><rect fill="none" height="24" width="24"/></g><g><path d="M11,7L9.6,8.4l2.6,2.6H2v2h10.2l-2.6,2.6L11,17l5-5L11,7z M20,19h-8v2h8c1.1,0,2-0.9,2-2V5c0-1.1-0.9-2-2-2h-8v2h8V19z"/></g></svg> <span class="side-menu__label">გასვლა</span></a>
 				</div>
 			</div>
 		</aside>
@@ -170,16 +173,13 @@
             <!-- Footer opened -->
 		<div class="main-footer ht-40">
 			<div class="container-fluid pd-t-0-f ht-100p">
-				<span>Copyright © 2021 <a href="#">Dashfox</a>. Designed by <a href="https://www.spruko.com/">Spruko</a> All rights reserved.</span>
+				<span>Copyright © 2021 <a href="https://itweb.ge">ITWEB.GE</a>. All rights reserved.</span>
 			</div>
 		</div>
 		<!-- Footer closed -->
         <!-- Back-to-top -->
 		<a href="#top" id="back-to-top"><i class="las la-angle-double-up"></i></a>
 		<!-- Internal Data tables -->
-
-
-		<!--Internal  Datatable js -->
 
 		<!-- Jquery js-->
 		<script src="{{ asset('assets/adminassets/plugins/jquery/jquery.min.js') }}"></script>

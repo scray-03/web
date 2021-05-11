@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-md-12 main_title_col">
                     <div class="jl_cat_mid_title">
-                        <h3 class="categories-title title">{{ $cat->name }}</h3>
+                        <h3 class="categories-title title">ძებნა</h3>
                     </div>
                 </div>
             </div>
@@ -24,15 +24,15 @@
             <div class="col-md-8 grid-sidebar" id="content">
                 <div class="jl_wrapper_cat">
                     <div id="content_masonry" class="pagination_infinite_style_cat ">
-                       @foreach ($cat_news as $c_news)
+                       @foreach ($results as $result)
                         <div class="box jl_grid_layout1 blog_grid_post_style post-2970 post type-post status-publish format-gallery has-post-thumbnail hentry category-business tag-inspiration tag-morning tag-racing post_format-post-format-gallery"
                             data-aos="fade-up">
                             <div class="post_grid_content_wrapper">
                                 <div class="image-post-thumb">
-                                    <a href={{ route('post' , $c_news->id) }} class="link_image featured-thumbnail"
+                                    <a href={{ route('post' , $result->id) }} class="link_image featured-thumbnail"
                                         title="People are enjoy the job that they love">
                                         <img width="250" height="250"
-                                            src="{{ asset('blog/storage/app/public/'.$c_news->image) }}"
+                                            src="{{ asset('blog/storage/app/public/'.$result->image) }}"
                                             class="attachment-disto_large_feature_image size-disto_large_feature_image wp-post-image"
                                             alt="" />
                                         <div class="background_over_image"></div>
@@ -42,10 +42,10 @@
                                 <div class="post-entry-content">
                                     <div class="post-entry-content-wrapper">
                                         <div class="large_post_content">
-                                            <h3 class="image-post-title"><a href={{ route('post' , $c_news->id) }}>
-                                                    {{ $c_news->title }}</a></h3>
+                                            <h3 class="image-post-title"><a href={{ route('post' , $result->id) }}>
+                                                    {{ $result->title }}</a></h3>
                                             <span class="jl_post_meta"><span class="jl_author_img_w"></span><span class="post-date"><i
-                                                        class="fa fa-clock-o"></i>{{ $c_news->upload_date }}&nbsp;&nbsp;</span><i class="fa fa-eye"></i>&nbsp;{{ $c_news->visitors }}</span></span>
+                                                        class="fa fa-clock-o"></i>{{ $result->upload_date }}&nbsp;&nbsp;</span><i class="fa fa-eye"></i>&nbsp;{{ $result->visitors }}</span></span>
                                         </div>
                                     </div>
                                 </div>

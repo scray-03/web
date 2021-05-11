@@ -16,11 +16,11 @@
         <div class="breadcrumb-header justify-content-between">
     
                                 <div class="left-content">
-                <h4 class="content-title mb-2">Hi, welcome back!</h4>
+                <h4 class="content-title mb-2">ყველა დამატებული სიახლე!</h4>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Analytics &amp; Monitoring</li>
+                        <li class="breadcrumb-item"><a href="#">AdminPanel</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">All Added News</li>
                     </ol>
                 </nav>
             </div>
@@ -45,12 +45,27 @@
                                     <tr>
                                         <td class="font-weight-bold"><div class="d-flex"><span class="mg-l-10 mg-t-7">{{ $new->title }}</span></div></td>
                                         <td class="font-weight-bold"><div class="d-flex"><span class="mg-l-10 mg-t-7">{{ $new->upload_date }}</span></div></td>
-                                        <td><button type="button" class="btn btn-primary">რედაქტირება</button>												</td>
-                                        <td><button type="button" class="btn btn-danger">წაშლა</button>												</td>
+                                        <td>
+                                            <form action="{{ route('admin.news.edit' , $new->id) }}" method="GET">
+                                                @method('Patch')
+                                                <input type="submit" value="რედაქტირება" class="btn btn-primary" onclick="return confirm('ნამდვილად გსურთ სიახლის რედაქტირება?')">                   
+                                                </form>
+                                            </td>                                        </td>
+                                        <td>
+                                        <form action="{{ route('admin.news.destroy' , $new->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="submit" value="წაშლა" class="btn btn-danger" onclick="return confirm('ნამდვილად გსურთ წაშლა?')">
+                                            
+                                            </form>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
+                        </div>
+                        <div>
+                            {{ $news->links() }} 
                         </div>
                     </div>
                 </div>

@@ -16,11 +16,11 @@
         <div class="breadcrumb-header justify-content-between">
     
                                 <div class="left-content">
-                <h4 class="content-title mb-2">ბოლოს დამატებული სიახლეები</h4>
+                <h4 class="content-title mb-2">კატეგორიების სია</h4>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">AdminPanel</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Last Added News</li>
+                        <li class="breadcrumb-item active" aria-current="page">All Categories</li>
                     </ol>
                 </nav>
             </div>
@@ -34,29 +34,25 @@
                             <table id="example1" class="table table-striped table-bordered text-nowrap" style="width:100%">
                                 <thead>
                                     <tr class="bold">
-                                        <th class="border-bottom-0">სათაური </th>
-                                        <th class="border-bottom-0">ატვირთვის დრო</th>
+                                        <th class="border-bottom-0">კატეგორიის დასახელება</th>
                                         <th class="border-bottom-0">რედაქტირება</th>
                                         <th class="border-bottom-0">წაშლა</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ( $news as $new)
+                                    @foreach ( $categories as $cat)
                                     <tr>
-                                        <td class="font-weight-bold"><div class="d-flex"><span class="mg-l-10 mg-t-7">{{ $new->title }}</span></div></td>
-                                        <td class="font-weight-bold"><div class="d-flex"><span class="mg-l-10 mg-t-7">{{ $new->upload_date }}</span></div></td>
-                                        <td>
-                                            <form action="{{ route('admin.news.edit' , $new->id) }}" method="GET">
+                                        <td class="font-weight-bold"><div class="d-flex"><span class="mg-l-10 mg-t-7">{{ $cat->name }}</span></div></td>                                        <td>
+                                            <form action="{{ route('admin.cat.edit' , $cat->id) }}" method="GET">
                                                 @method('Patch')
                                                 <input type="submit" value="რედაქტირება" class="btn btn-primary" onclick="return confirm('ნამდვილად გსურთ სიახლის რედაქტირება?')">                   
                                                 </form>
                                             </td>                                        </td>
                                         <td>
-                                        <form action="{{ route('admin.news.destroy' , $new->id) }}" method="POST">
+                                        <form action="{{ route('admin.cat.destroy' , $cat->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <input type="submit" value="წაშლა" class="btn btn-danger" onclick="return confirm('ნამდვილად გსურთ წაშლა?')">
-                                            
                                             </form>
                                         </td>
                                     </tr>
